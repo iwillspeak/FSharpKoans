@@ -17,10 +17,11 @@ match result with
     printfn ""
     printfn "Please meditate on the following code:"
     printfn "%s" ex.StackTrace
-    
-printfn ""
-printfn ""
-printfn ""
-printfn ""
-printf "Press any key to continue..."
-System.Console.ReadKey() |> ignore
+    exit 1
+
+// printfn ""
+// printfn ""
+// printfn ""
+// printfn ""
+// printf "Press any key to continue..."
+// System.Console.ReadKey() |> ignore
