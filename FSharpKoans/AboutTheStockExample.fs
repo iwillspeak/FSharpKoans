@@ -1,10 +1,11 @@
 ﻿namespace FSharpKoans
 open FSharpKoans.Core
+open System
 
 //---------------------------------------------------------------
 // Apply Your Knowledge!
 //
-// Below is a list containing comma separated data about 
+// Below is a list containing comma separated data about
 // Microsoft's stock prices during March of 2012. Without
 // modifying the list, programatically find the day with the
 // greatest variance between the opening and closing price.
@@ -13,10 +14,10 @@ open FSharpKoans.Core
 // 
 // abs - takes the absolute value of an argument
 // 
-// System.Double.Parse - converts a string argument into a 
+// System.Double.Parse - converts a string argument into a
 //                       numerical value.
 //
-// Hint: Use CultureInfo.InvariantCulture to always parse '.' as 
+// Hint: Use CultureInfo.InvariantCulture to always parse '.' as
 // the decimal point.
 //
 // The following function will convert a comma separated string
@@ -55,11 +56,28 @@ module ``about the stock example`` =
           "2012-02-29,31.89,32.00,31.61,31.74,59323600,31.74"; ]
     
     // Feel free to add extra [<Koan>] members here to write
-    // tests for yourself along the way. You can also try 
+    // tests for yourself along the way. You can also try
     // using the F# Interactive window to check your progress.
 
     [<Koan>]
     let YouGotTheAnswerCorrect() =
-        let result =  __
+
+        let getFields (stock:string) =
+            stock.Split([|','|])
+
+        let getStockVariance stock =
+            let fields = getFields stock
+            let start = fields.[1] |> Double.Parse
+            let close = fields.[4] |> Double.Parse
+
+            abs <| start - close
+
+        let startDate (stock:string) =
+            stock.Split([|','|]).[0]
+            
+        let result = stockData
+                    |> Seq.skip 1
+                    |> Seq.maxBy getStockVariance
+                    |> startDate
         
         AssertEquality "2012-03-13" result
